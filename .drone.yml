@@ -2,26 +2,13 @@
 kind: pipeline
 name: drone-gke-deployer
 
-# steps:
-# - name: build  
-#   image: plugins/gcr
-#   settings:
-#     registry: eu.gcr.io
-#     repo: moss-work/drone-gke-deployer
-#     tags: latest
-#     json_key:
-#       from_secret: MW_PUSH_CREDS
-#   when:
-#     event: push
-#     branch: master
-
 steps:
 - name: build  
   image: plugins/docker
   settings:
     username: mosstech
     password:
-      from_secret: docker_hub_pass
+      from_secret: DOCKER_REGISTRY_PASS
     repo: mosstech/drone-gke-deployer
     auto_tag: true
   when:
@@ -30,6 +17,6 @@ steps:
 
 ---
 kind: signature
-hmac: a5481f3d573cdc04d8f1aef251bbd9c82fd5daa67cb00a6cf7254b681dd214fe
+hmac: 6d8d7fd300f25efdfc7a1baea7ef9bb17171a6ae5852849a939a2302dee9ee02
 
 ...
