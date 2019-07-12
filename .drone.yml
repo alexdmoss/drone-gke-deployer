@@ -12,8 +12,8 @@ steps:
     json_key:
       from_secret: MW_PUSH_CREDS
   when:
-    event:
-    - push
+    event: push
+    branch: master
 ---
 kind: signature
 hmac: a5481f3d573cdc04d8f1aef251bbd9c82fd5daa67cb00a6cf7254b681dd214fe
