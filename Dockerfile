@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 # Setup essentials for other installers
 RUN apt-get update \
-    && apt-get install -y python python3 \
+    && apt-get install -y python python3 python-pip python3-pip \
     && apt-get install -y curl \
     && apt-get install -y git
 
