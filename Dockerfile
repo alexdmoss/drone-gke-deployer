@@ -1,9 +1,13 @@
 FROM ubuntu:18.04
 
+# Setup essentials for other installers
 RUN apt-get update \
     && apt-get install -y python python3 \
     && apt-get install -y curl \
     && apt-get install -y git
+
+# Setup python
+RUN pip install pipenv
 
 # Setup gcloud
 ENV PATH=$PATH:/usr/local/gcloud/google-cloud-sdk/bin
