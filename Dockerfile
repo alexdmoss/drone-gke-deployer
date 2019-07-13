@@ -2,12 +2,20 @@ FROM ubuntu:18.04
 
 # Setup essentials for other installers
 RUN apt-get update \
-    && apt-get install -y python python3 python-pip python3-pip \
-    && apt-get install -y curl \
-    && apt-get install -y git
+    && apt-get install -y curl git 
 
 # Setup python
+RUN apt-get install -y python python-dev python-pip
+RUN apt-get install -y python3 python3-dev python3-pip
+RUN apt-get install -y build-essential zlib1g-dev libncurses5-dev libbz2-dev libsqlite3-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
 RUN pip install pipenv
+RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv \
+    && chmod +x $HOME/.pyenv \
+    && ln -s $HOME/.pyenv/bin/pyenv /usr/local/bin/pyenv
+ENV PYTHON_VERSION=3.7.2
+RUN pyenv install $PYTHON_VERSION \
+    && pyenv global $PYTHON_VERSION \
+    && pyenv rehash
 
 # Setup gcloud
 ENV PATH=$PATH:/usr/local/gcloud/google-cloud-sdk/bin
@@ -22,7 +30,7 @@ RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tm
 # Setup kubectl
 ENV KUBECTL_VERSION=1.15.0
 RUN cd /usr/local/bin && \
-    curl -LO https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl && \
+    curl -sLO https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl && \
     chmod +x kubectl
 
 CMD ["/bin/bash"]
