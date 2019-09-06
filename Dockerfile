@@ -24,4 +24,12 @@ RUN cd /usr/local/bin && \
     curl -sLO https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl && \
     chmod +x kubectl
 
+# Setup kustomize
+ENV KUSTOMIZE_VERSION=3.0.0
+ENV KUSTOMIZE_SHA256="ef0dbeca85c419891ad0e12f1f9df649b02ceb01517fa9aea0297ef14e400c7a kustomize"
+RUN cd /usr/local/bin && \
+    curl -sL -o kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64 && \
+    echo "${KUSTOMIZE_SHA256}" | sha256sum --check --status && \
+    chmod +x kustomize
+
 CMD ["/bin/bash"]
