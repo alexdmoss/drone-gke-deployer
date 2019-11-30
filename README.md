@@ -10,13 +10,3 @@ Two goals for this repo:
 2. I wanted to learn a bit more about how Drone actually works.
 
 If you want something a bit more established, then this is probably a good bet: https://github.com/nytimes/drone-gke/
-
-## Usage
-
-It's not configured to auto-build on push to github, so:
-
-```sh
-docker build mosstech/drone-gke-deployer:latest
-docker login --usernam=mosstech
-docker push mosstech/drone-gke-deployer:latest
-```
