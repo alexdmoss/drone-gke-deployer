@@ -19,7 +19,7 @@ RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tm
     && gcloud config set core/disable_usage_reporting true
 
 # Setup kubectl
-ENV KUBECTL_VERSION=1.15.0
+ENV KUBECTL_VERSION=1.16.3
 RUN cd /usr/local/bin && \
     curl -sLO https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl && \
     chmod +x kubectl
