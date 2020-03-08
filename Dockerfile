@@ -32,4 +32,14 @@ RUN cd /usr/local/bin && \
     echo "${KUSTOMIZE_SHA256}" | sha256sum --check --status && \
     chmod +x kustomize
 
+# Setup docker
+RUN apt-get install apt-transport-https ca-certificates gnupg-agent software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+RUN apt-get update
+RUN apt-get install docker-ce docker-ce-cli containerd.io
+RUN groupadd docker && \
+    usermod -aG docker ${USER} && \
+    chmod 666 /var/run/docker.sock
+
 CMD ["/bin/bash"]
