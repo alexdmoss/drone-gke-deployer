@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 # Setup essentials for other installers
 RUN apt-get update \
-    && apt-get install -y curl git jq gettext \
+    && apt-get install -y curl git jq gettext apache2-utils \
     && apt-get install -y python python-dev python-pip \
     && apt-get install -y python3 python3-dev python3-pip \
     && pip install pipenv
