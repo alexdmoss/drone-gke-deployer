@@ -32,4 +32,8 @@ RUN cd /usr/local/bin && \
     echo "${KUSTOMIZE_SHA256}" | sha256sum --check --status && \
     chmod +x kustomize
 
+# install gitbook
+RUN apt-get install -y npm \
+    && npm install gitbook-cli -g
+
 CMD ["/bin/bash"]
