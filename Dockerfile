@@ -7,7 +7,6 @@ RUN apt-get update \
     && apt-get install -y python3 python3-dev python3-pip \
     && pip install pipenv
 
-
 # Setup gcloud
 ENV PATH=$PATH:/usr/local/gcloud/google-cloud-sdk/bin
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz \
@@ -35,5 +34,11 @@ RUN cd /usr/local/bin && \
 # install gitbook
 RUN apt-get install -y npm \
     && npm install gitbook-cli -g
+
+# terraform via tfenv
+ENV TFENV_AUTO_INSTALL=true
+RUN git clone https://github.com/tfutils/tfenv.git ~/.tfenv \
+    && ln -s ~/.tfenv/bin/* /usr/local/bin \
+    && mkdir ~/.tfenv/versions
 
 CMD ["/bin/bash"]
