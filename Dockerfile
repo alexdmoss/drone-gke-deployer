@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 # Setup essentials for other installers
 RUN apt-get update && apt-get install -y \
   curl \
+  ca-certificates \
   gettext-base \
   git \
   gnupg2 \
