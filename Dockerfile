@@ -1,11 +1,25 @@
 FROM ubuntu:18.04
 
 # Setup essentials for other installers
-RUN apt-get update \
-    && apt-get install -y curl git jq gettext apache2-utils unzip \
-    && apt-get install -y python python-dev python-pip \
+RUN apt-get update && apt-get install -y \
+  curl \
+  gettext-base \
+  git \
+  gnupg2 \
+  less \
+  openssh-client \
+  shellcheck \
+  unzip \
+  apache2-utils \  
+  wget
+
+RUN apt-get install -y python python-dev python-pip \
     && apt-get install -y python3 python3-dev python3-pip \
     && pip install pipenv
+
+RUN cd /usr/local/bin && \
+  wget --no-verbose -O jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
+  chmod +x jq
 
 # Setup gcloud
 ENV PATH=$PATH:/usr/local/gcloud/google-cloud-sdk/bin
